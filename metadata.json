@@ -1,0 +1,7 @@
+{
+  "name": "Fisco3 - Consulenza Fiscale e Contabile",
+  "description": "Sito web professionale per Fisco3, studio di consulenza fiscale e contabilità con focus su serenità e risparmio fiscale.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
