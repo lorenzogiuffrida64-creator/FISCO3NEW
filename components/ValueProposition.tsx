@@ -33,9 +33,9 @@ const ValueProposition: React.FC = () => {
 
         <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
            <div className="order-2 md:order-1">
-             <img 
-               src="https://images.unsplash.com/photo-1521791136364-798a7bc0d262?auto=format&fit=crop&q=80&w=800" 
-               alt="Team di esperti felici" 
+             <img
+               src="/team-office.png"
+               alt="Team di esperti Fisco3"
                className="rounded-3xl shadow-2xl"
              />
            </div>

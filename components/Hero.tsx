@@ -16,8 +16,8 @@ const Hero: React.FC = () => {
   const MainImage = () => (
     <div className="relative group max-w-5xl mx-auto w-full">
       <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl transition-all duration-500 hover:shadow-blue-200/50 bg-gray-100">
-        <img 
-          src="https://generativelanguage.googleapis.com/v1beta/files/u5clz8r7sh9i" 
+        <img
+          src="/team-hero.png"
           alt="Il Team di Fisco3" 
           className="w-full h-[25rem] md:h-[35rem] object-cover object-top transition-transform duration-700 group-hover:scale-105"
         />
@@ -100,7 +100,7 @@ const Hero: React.FC = () => {
             {[1,2,3,4,5].map(star => <Star key={star} size={20} fill="currentColor"/>)}
           </div>
           <p className="text-xl text-gray-900 font-bold">Oltre 100 clienti soddisfatti</p>
-          <p className="text-sm text-gray-400">Punteggio medio di 4.9/5 certificato su Google</p>
+          <p className="text-sm text-gray-400">Punteggio medio di 5/5 certificato su Google</p>
         </div>
       </div>
     </div>
@@ -148,16 +148,14 @@ const Hero: React.FC = () => {
             </p>
           </div>
 
-          {/* SUI COMPUTER: L'immagine va al posto della cartella e viceversa */}
-          
-          {/* Box Analisi Cartella: Seconda posizione su Mobile, Terza posizione su Desktop */}
-          <div className="order-2 lg:order-3 w-full">
-            <ServiceAnalysisBox />
+          {/* 2. Immagine del Team */}
+          <div className="order-2 w-full">
+            <MainImage />
           </div>
 
-          {/* Immagine del Team: Terza posizione su Mobile, Seconda posizione su Desktop */}
-          <div className="order-3 lg:order-2 w-full">
-            <MainImage />
+          {/* 3. Box Analisi Cartella */}
+          <div className="order-3 w-full">
+            <ServiceAnalysisBox />
           </div>
 
           {/* 4. Box Serenità Finanziaria */}

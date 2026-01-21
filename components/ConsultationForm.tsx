@@ -1,13 +1,38 @@
 
 import React, { useState } from 'react';
-import { Send, CheckCircle } from 'lucide-react';
+import { Send, CheckCircle, Loader2 } from 'lucide-react';
 
 const ConsultationForm: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError('');
+
+    const formData = new FormData(e.currentTarget);
+    formData.append('access_key', '42a317e3-dcef-4a16-abd3-7e30c6373cd0');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setError('Errore durante l\'invio. Riprova.');
+      }
+    } catch {
+      setError('Errore di connessione. Riprova.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -35,18 +60,20 @@ const ConsultationForm: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label className="text-sm font-bold text-gray-700 ml-1">Nome Completo</label>
-          <input 
-            type="text" 
-            required 
+          <input
+            type="text"
+            name="nome"
+            required
             placeholder="Es. Mario Rossi"
             className="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-transparent focus:border-[#1657e8] focus:bg-white outline-none transition-all"
           />
         </div>
         <div className="space-y-2">
           <label className="text-sm font-bold text-gray-700 ml-1">Email</label>
-          <input 
-            type="email" 
-            required 
+          <input
+            type="email"
+            name="email"
+            required
             placeholder="mario@esempio.it"
             className="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-transparent focus:border-[#1657e8] focus:bg-white outline-none transition-all"
           />
@@ -56,16 +83,17 @@ const ConsultationForm: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label className="text-sm font-bold text-gray-700 ml-1">Telefono</label>
-          <input 
-            type="tel" 
-            required 
+          <input
+            type="tel"
+            name="telefono"
+            required
             placeholder="+39 000 0000000"
             className="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-transparent focus:border-[#1657e8] focus:bg-white outline-none transition-all"
           />
         </div>
         <div className="space-y-2">
           <label className="text-sm font-bold text-gray-700 ml-1">Tipo di Quesito</label>
-          <select className="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-transparent focus:border-[#1657e8] focus:bg-white outline-none transition-all appearance-none cursor-pointer">
+          <select name="tipo_quesito" className="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-transparent focus:border-[#1657e8] focus:bg-white outline-none transition-all appearance-none cursor-pointer">
             <option>Cartelle Esattoriali / Rottamazione</option>
             <option>Regime Forfettario</option>
             <option>Modello 730 / Rimborsi</option>
@@ -77,19 +105,29 @@ const ConsultationForm: React.FC = () => {
 
       <div className="space-y-2">
         <label className="text-sm font-bold text-gray-700 ml-1">Messaggio (Opzionale)</label>
-        <textarea 
+        <textarea
           rows={4}
+          name="messaggio"
           placeholder="Raccontaci brevemente di cosa hai bisogno..."
           className="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-transparent focus:border-[#1657e8] focus:bg-white outline-none transition-all resize-none"
         ></textarea>
       </div>
 
+      {error && (
+        <p className="text-red-500 text-center font-medium">{error}</p>
+      )}
+
       <div className="pt-4">
-        <button 
+        <button
           type="submit"
-          className="w-full bg-[#1657e8] text-white py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 transition-all hover:bg-blue-700 hover:shadow-xl hover:-translate-y-1 active:scale-[0.98]"
+          disabled={loading}
+          className="w-full bg-[#1657e8] text-white py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 transition-all hover:bg-blue-700 hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
         >
-          Richiedi Analisi Gratuita <Send size={20} />
+          {loading ? (
+            <>Invio in corso... <Loader2 size={20} className="animate-spin" /></>
+          ) : (
+            <>Richiedi Analisi Gratuita <Send size={20} /></>
+          )}
         </button>
         <p className="text-center text-xs text-gray-400 mt-4">
           I tuoi dati sono al sicuro. Ai sensi del GDPR, garantiamo la massima riservatezza.

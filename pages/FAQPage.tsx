@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FAQ_DATA } from '../constants';
 import { Plus, Minus, HelpCircle } from 'lucide-react';
 
@@ -59,12 +60,12 @@ const FAQPage: React.FC = () => {
           <div className="mt-20 p-12 bg-gray-50 rounded-[3rem] text-center space-y-6 border border-gray-100">
              <h3 className="text-2xl font-bold text-gray-900">Hai altre domande?</h3>
              <p className="text-gray-600">Siamo a tua disposizione per chiarire ogni dubbio.</p>
-             <a 
-               href="mailto:studi.greco@gmail.com"
+             <Link
+               to="/consulenze"
                className="inline-block bg-[#1657e8] text-white px-10 py-4 rounded-2xl font-bold transition-all hover:bg-blue-700 hover:shadow-lg active:scale-95"
              >
                Scrivici ora
-             </a>
+             </Link>
           </div>
         </div>
       </div>
