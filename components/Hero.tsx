@@ -116,7 +116,7 @@ const Hero: React.FC = () => {
         <p className="text-blue-400 font-bold text-sm uppercase tracking-[0.3em] mb-4">La differenza Fisco3</p>
         <h4 className="text-3xl md:text-4xl font-bold mb-6">Ottimizzazione legale al 100%</h4>
         <p className="text-xl text-gray-300 leading-relaxed mb-10 max-w-2xl">Non ci limitiamo a inserire dati. Analizziamo ogni detrazione possibile per minimizzare il tuo carico fiscale legalmente e strategicamente.</p>
-        <Link to="/contabilita" className="inline-flex items-center gap-3 text-white font-bold text-xl group-hover:gap-5 transition-all">
+        <Link to="/consulenze" className="inline-flex items-center gap-3 text-white font-bold text-xl group-hover:gap-5 transition-all">
           Scopri il nostro metodo <span className="text-blue-400 text-2xl">→</span>
         </Link>
       </div>
