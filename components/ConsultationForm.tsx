@@ -24,6 +24,10 @@ const ConsultationForm: React.FC = () => {
       const data = await response.json();
 
       if (data.success) {
+        // Track Lead event for Meta Ads
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          (window as any).fbq('track', 'Lead');
+        }
         setSubmitted(true);
       } else {
         setError('Errore durante l\'invio. Riprova.');
